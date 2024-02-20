@@ -1,6 +1,6 @@
 # Pantau Pemilu 2024
 
-Data yang diambil adalah berasal dari website https://data-pemilu.vercel.app/
+Data yang diambil adalah berasal dari website [data-pemilu.vercel.app](https://data-pemilu.vercel.app)
 
 Database yang digunakan adalah PostgreSQL. Berikut adalah kredensial untuk mengakses database.
 
