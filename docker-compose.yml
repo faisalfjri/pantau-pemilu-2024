@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+    pantau-pemilu:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: faisalfjri/pantau-pemilu
+        container_name: pantau-pemilu
+        restart: unless-stopped
+        working_dir: /var/www/html/pantau-pemilu
+        volumes:
+            - ./:/var/www/html/pantau-pemilu
+        ports:
+            - 8009:8009
+        networks:
+            - shared_network
+
+networks:
+    shared_network:
+        driver: bridge
+        name: shared_network

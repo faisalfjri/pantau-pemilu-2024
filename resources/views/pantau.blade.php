@@ -102,42 +102,33 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">provinsi_kode</th>
-                    <th scope="col">kabupaten_kota_kode</th>
-                    <th scope="col">kecamatan_kode</th>
-                    <th scope="col">kelurahan_desa_kode</th>
-                    <th scope="col">tps</th>
-                    <th scope="col">suara_paslon_1</th>
-                    <th scope="col">suara_paslon_2</th>
-                    <th scope="col">suara_paslon_3</th>
+                    <th scope="col">Kode</th>
+                    <th scope="col">Provinsi</th>
+                    <th scope="col">Paslon_1</th>
+                    <th scope="col">Paslon_2</th>
+                    <th scope="col">Paslon_3</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($datas as $data)
                 <tr>
                     <th scope="row">{{ $loop->index +1 }}</th>
-                    <td>{{ $data->provinsi_nama }}</td>
-                    <td>{{ $data->kabupaten_kota_nama }}</td>
-                    <td>{{ $data->kecamatan_nama }}</td>
-                    <td>{{ $data->kelurahan_desa_nama }}</td>
-                    <td>{{ $data->tps }}</td>
-                    <td>{{ $data->suara_paslon_1 }}</td>
-                    <td>{{ $data->suara_paslon_2 }}</td>
-                    <td>{{ $data->suara_paslon_3 }}</td>
+                    <td>{{ $data['kode'] }}</td>
+                    <td><a href="{{ route('provinsi', $data['kode']) }}" target="_blank" rel="noopener noreferrer">{{ $data['nama'] }}</a></td>
+                    <td class="text-end">{{ $data['chart']->{'100025'} }}</td>
+                    <td class="text-end">{{ $data['chart']->{'100026'} }}</td>
+                    <td class="text-end">{{ $data['chart']->{'100027'} }}</td>
                 </tr>
                 @endforeach
             </tbody>
             <tfoot>
                 <tr>
-                    <th>Footer</th>
-                    <td>Footer</td>
-                    <td>Footer</td>
-                    <td>Footer</td>
-                    <td>Footer</td>
-                    <td>TPS</td>
-                    <td>Footer</td>
-                    <td>Footer</td>
-                    <td>Footer</td>
+                    <th>#</th>
+                    <td>Kode</td>
+                    <td>Provinsi</td>
+                    <td class="text-end">{{ $suara_paslon_1 }}</td>
+                    <td class="text-end">{{ $suara_paslon_2 }}</td>
+                    <td class="text-end">{{ $suara_paslon_3 }}</td>
                 </tr>
             </tfoot>
         </table>
@@ -147,6 +138,24 @@
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Select all elements with the class "text-end"
+            var textEndElements = document.querySelectorAll(".text-end");
+
+            // Loop through each element
+            textEndElements.forEach(function(element) {
+                // Get the text content of the element and convert it to a number
+                var number = parseFloat(element.textContent);
+
+                // Check if the number is not NaN
+                if (!isNaN(number)) {
+                    // Format the number with commas using toLocaleString() and set it as the new text content
+                    element.textContent = number.toLocaleString();
+                }
+            });
+        });
+    </script>
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
