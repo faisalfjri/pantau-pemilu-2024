@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\PpwpProvinsi;
 use App\Models\PpwpTps;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
@@ -16,28 +17,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $response = Http::get("https://sirekap-obj-data.kpu.go.id/wilayah/pemilu/ppwp/0.json")->object();
-
-    $relatedData = [];
-    foreach ($response as $data) {
-        $hasil = Http::get("https://sirekap-obj-data.kpu.go.id/pemilu/hhcw/ppwp/$data->kode.json")->object();
-
-        $relatedData[] = [
-            'nama' => $data->nama,
-            'kode' => $data->kode,
-            'chart' => $hasil->chart ?? null,
-        ];
-    }
-
-    $suara_paslon_1 = collect($relatedData)->sum('chart.100025');
-    $suara_paslon_2 = collect($relatedData)->sum('chart.100026');
-    $suara_paslon_3 = collect($relatedData)->sum('chart.100027');
+    $relatedData = PpwpProvinsi::get();
+    $suara_paslon_1 = collect($relatedData)->sum('suara_paslon_1');
+    $suara_paslon_2 = collect($relatedData)->sum('suara_paslon_2');
+    $suara_paslon_3 = collect($relatedData)->sum('suara_paslon_3');
 
     return view('pantau', [
         'datas' => $relatedData,
         'suara_paslon_1' => $suara_paslon_1,
         'suara_paslon_2' => $suara_paslon_2,
         'suara_paslon_3' => $suara_paslon_3
+
     ]);
 });
 

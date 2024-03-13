@@ -114,10 +114,10 @@
                 <tr>
                     <th scope="row">{{ $loop->index +1 }}</th>
                     <td>{{ $data['kode'] }}</td>
-                    <td><a href="{{ route('provinsi', $data['kode']) }}" target="_blank" rel="noopener noreferrer">{{ $data['nama'] }}</a></td>
-                    <td class="text-end">{{ $data['chart']->{'100025'} }}</td>
-                    <td class="text-end">{{ $data['chart']->{'100026'} }}</td>
-                    <td class="text-end">{{ $data['chart']->{'100027'} }}</td>
+                    <td><a href="{{ route('provinsi', $data['kode']) }}" target="_blank" rel="noopener noreferrer">{{ $data['provinsi_nama'] }}</a></td>
+                    <td class="text-end">{{ $data->suara_paslon_1 }}</td>
+                    <td class="text-end">{{ $data->suara_paslon_2 }}</td>
+                    <td class="text-end">{{ $data->suara_paslon_3 }}</td>
                 </tr>
                 @endforeach
             </tbody>
